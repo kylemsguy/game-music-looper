@@ -4,9 +4,10 @@ from pygame.locals import *
 
 def select_song(title: str):
     if title:
+        import os
         os.chdir(title)
 
-# If none specified then load RBY Trainer Battle theme
+# If none specified then load song in current dir
 #select_song("DPPtChampion") # uncomment for Cynthia's battle theme
 
 pygame.init()
