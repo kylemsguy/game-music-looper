@@ -52,13 +52,45 @@ print("Loading image...\nMISSINGNO.")
 background = pygame.image.load("background.png")
 backgroundRect = background.get_rect()
 
+paused = False
+started = True
 while True:
-    bgmChannel.queue(loopSound)
+    if started:
+        bgmChannel.queue(loopSound)
     for event in pygame.event.get():
         if event.type == QUIT:
             print("Quitting...")
             pygame.quit()
             sys.exit()
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if paused:
+                bgmChannel.unpause()
+                paused = False
+            else:
+                bgmChannel.pause()
+                paused = True
+                
+        elif event.type == pygame.KEYDOWN:
+            pressed = pygame.key.get_pressed()
+            if pressed[pygame.K_s]:
+                bgmChannel.stop()
+                started = False
+
+            elif pressed[pygame.K_SPACE]:
+                print("Restarting music...")
+                bgmChannel.play(introSound)
+                started = True
+
+            elif pressed[pygame.K_p]:
+                if paused:
+                    bgmChannel.unpause()
+                    paused = False
+                else:
+                    bgmChannel.pause()
+                    paused = True
+            else:
+                pass
 
         else:
             pass
