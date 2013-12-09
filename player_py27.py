@@ -1,7 +1,7 @@
 #!/usr/bin/python
+from __future__ import print_function # to make print() work on py2.7
 import pygame, sys
 from pygame.locals import *
-from __future__ import print_function # to make print() work on py2.7
 
 def select_song(title):
     """Changes the song to be played"""
