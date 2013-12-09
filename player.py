@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import pygame, sys
+import time
 from pygame.locals import *
 
 def select_song(title: str):
@@ -53,6 +54,7 @@ backgroundRect = background.get_rect()
 
 paused = False
 started = True
+champ = False
 while True:
     if started:
         bgmChannel.queue(loopSound)
@@ -88,6 +90,19 @@ while True:
                 else:
                     bgmChannel.pause()
                     paused = True
+            elif pressed[pygame.K_c]:
+                print("Changing songs...")
+                if champ:
+                    select_song("..")
+                    champ = False
+                else:
+                    select_song("DPPtChampion")
+                    champ = True
+                introSound = pygame.mixer.Sound("intro.ogg")
+                loopSound = pygame.mixer.Sound("loop.ogg")
+                bgmChannel.stop()
+                time.sleep(0.25)
+                bgmChannel.play(introSound)
             else:
                 pass
 
