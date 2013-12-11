@@ -78,13 +78,13 @@ while True:
                 bgmChannel.stop()
                 started = False
 
-            elif pressed[pygame.K_SPACE]:
+            elif pressed[pygame.K_r]:
                 print("Restarting music...")
                 bgmChannel.play(introSound)
                 started = True
                 paused = False
 
-            elif pressed[pygame.K_p]:
+            elif pressed[pygame.K_p] or pressed[pygame.K_SPACE]:
                 if paused:
                     bgmChannel.unpause()
                     paused = False
