@@ -1,16 +1,16 @@
-#!/usr/bin/python3
+#!/usr/bin/python
+from __future__ import print_function # to make print() work on py2.7
 import pygame, sys
-import time
 from pygame.locals import *
 
-def select_song(title: str):
+def select_song(title):
     """Changes the song to be played"""
     if title:
         import os
         os.chdir(title)
 
 # If none specified then load song in current dir
-#select_song("DPPtChampion") # uncomment for Cynthia's battle theme
+select_song("DPPtChampion") # uncomment for Cynthia's battle theme
 
 pygame.init()
 fpsClock = pygame.time.Clock()
@@ -54,7 +54,6 @@ backgroundRect = background.get_rect()
 
 paused = False
 started = True
-champ = False
 while True:
     if started:
         bgmChannel.queue(loopSound)
@@ -82,7 +81,6 @@ while True:
                 print("Restarting music...")
                 bgmChannel.play(introSound)
                 started = True
-                paused = False
 
             elif pressed[pygame.K_p] or pressed[pygame.K_SPACE]:
                 if paused:
@@ -91,19 +89,6 @@ while True:
                 else:
                     bgmChannel.pause()
                     paused = True
-            elif pressed[pygame.K_c]:
-                print("Changing songs...")
-                if champ:
-                    select_song("..")
-                    champ = False
-                else:
-                    select_song("DPPtChampion")
-                    champ = True
-                introSound = pygame.mixer.Sound("intro.ogg")
-                loopSound = pygame.mixer.Sound("loop.ogg")
-                bgmChannel.stop()
-                time.sleep(0.25)
-                bgmChannel.play(introSound)
             else:
                 pass
 
