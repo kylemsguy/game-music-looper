@@ -8,9 +8,16 @@ def select_song(title):
     if title:
         import os
         os.chdir(title)
+        print("Changing dir to", title)
 
 # If none specified then load song in current dir
-select_song("DPPtChampion") # uncomment for Cynthia's battle theme
+#select_song("DPPtChampion") # uncomment for Cynthia's battle theme
+
+if len(sys.argv) == 2:
+    select_song(sys.argv[1])
+elif len(sys.argv) > 2:
+    print("Too many arguments.")
+    quit()
 
 pygame.init()
 fpsClock = pygame.time.Clock()
